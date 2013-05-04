@@ -1,0 +1,21 @@
+#inventory input[type="checkbox"] {
+	margin: 18px 5px 0px 0px;
+	float: left;
+}
+
+.custom_instructions {
+	margin-left: 0px;
+	margin-top: 10px;
+}
+
+.checkout {
+	font-size:20px;
+}
+
+.home_preview {
+	margin-top:5px;
+}
+
+.social {
+	margin-top: 6px;
+}
