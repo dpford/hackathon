@@ -51,10 +51,27 @@
 
 	<div id="content">
 	  <div class="container">
-	    <h1>Assignements</h1>
+	    <h1>Assignments</h1>
 	    {% for key,value in assignments.items %}
 	    	<p><strong>{{ key }}:</strong> {{ value }}</p>
 	    {% endfor %}
+
+	    <div class="row">
+	    	<div class="span6">
+	    		<h2>Stories per team member</h2>
+	    		<!-- code goes here -->
+	    	</div>
+	    	<div class="span6">
+	    		<h2>Current status</h2>
+	    		<!-- code goes here -->
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="span12">
+	    		<h2>Unfinished user stores</h2>
+	    		<!-- code goes here -->
+	    	</div>
+	    </div>
 	  </div>
 	</div>
 
