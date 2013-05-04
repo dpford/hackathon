@@ -4,6 +4,8 @@ from django.views.decorators.cache import never_cache
 
 from trollop import TrelloConnection
 
+import datetime
+
 @never_cache
 def home(request):
 	data = {}
@@ -22,5 +24,32 @@ def home(request):
 			mem_count[member.fullname] += 1
 
 	data['assignments'] = mem_count
+
+	# Current status - count of each list
+	list_count = {}
+	for list in hackathon.lists:
+		list_count[list.name] = len(list.cards)
+
+	data['list_count'] = list_count
+
+	# Overdue stories
+	todaydate = datetime.datetime.now()
+	late_master = []
+	for card in hackathon.cards:
+		if card._data['due']:
+			duedate = datetime.datetime.strptime(card._data['due'][:19], '%Y-%m-%dT%H:%M:%S')
+			if duedate < todaydate:
+				late_dict = {}
+				late_members = []
+				for member in card.members:
+					late_members.append(member.fullname)
+				late_dict['members'] = late_members
+				late_dict['title'] = card.name
+				late_dict['description'] = card.desc
+				late_dict['due'] = card._data['due'][:10]
+				print late_dict
+				late_master.append(late_dict)
+
+	data['late_stories'] = late_master	
 
 	return render(request, 'index.html', data)
