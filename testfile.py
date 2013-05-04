@@ -34,3 +34,21 @@ print members
 print "*** Get cards for member ***"
 member_cards = hackathon.members[1].cards
 
+print "*** Get member counts ***"
+board_members = hackathon.members
+
+print "Create a list for each member"
+mem_count = {}
+for member in board_members:
+	print "Setup: " + str(member.fullname)
+	mem_count[member.fullname] = 0
+
+print mem_count
+
+for card in hackathon.cards:
+	for member in card.members:
+		print member.fullname
+		print card
+		mem_count[member.fullname] += 1
+
+print mem_count
