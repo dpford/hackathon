@@ -51,7 +51,10 @@
 
 	<div id="content">
 	  <div class="container">
-	    Test, yo
+	    <h1>Assignements</h1>
+	    {% for key,value in assignments.items %}
+	    	<p><strong>{{ key }}:</strong> {{ value }}</p>
+	    {% endfor %}
 	  </div>
 	</div>
 
