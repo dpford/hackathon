@@ -63,8 +63,11 @@
 	    		<!-- code goes here -->
 	    	</div>
 	    	<div class="span6">
-	    		<h2>Current status</h2>
-	    		{{ list_count }}
+	    		<h2>Current Project Status</h2>
+	    		{% for key,value in list_count.items %}
+		        	<p><strong>{{ value }}</strong> Stories in {{ key }}
+		        {% endfor %}
+
 	    		<!-- code goes here -->
 	    	</div>
 	    </div>
