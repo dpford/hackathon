@@ -1,6 +1,8 @@
 Django==1.5.1
 argparse==1.2.1
+boto==2.9.2
 dj-database-url==0.2.1
+django-storages==1.1.8
 gunicorn==0.17.4
 html5lib==0.95
 isodate==0.4.9
