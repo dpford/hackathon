@@ -83,9 +83,11 @@
 	    		<h2>Stories per team member</h2>
 	    		<div id="visualization" style="width: 600px; height: 400px;"></div>
 	    	</div>
-	    	<div class="span4">
-	    		<h2>Current status</h2>
-	    		{{ list_count }}
+	    	<div class="span6">
+	    		<h2>Current Project Status</h2>
+	    		{% for key,value in list_count.items %}
+		        	<p><strong>{{ value }}</strong> Stories in {{ key }}
+		        {% endfor %}
 	    	</div>
 	    </div>
 	    <div class="row">
