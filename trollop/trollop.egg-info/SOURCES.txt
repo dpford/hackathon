@@ -1,0 +1,11 @@
+MANIFEST.in
+README.rst
+setup.py
+trollop/__init__.py
+trollop/lib.py
+trollop/tests.py
+trollop.egg-info/PKG-INFO
+trollop.egg-info/SOURCES.txt
+trollop.egg-info/dependency_links.txt
+trollop.egg-info/requires.txt
+trollop.egg-info/top_level.txt
