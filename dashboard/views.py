@@ -9,9 +9,10 @@ import datetime
 @never_cache
 def home(request):
     data = {}
-    conn = TrelloConnection('8e08cc15f33eba483bc2ec18f5d9d2e8', '546c06039131159676b3f7c41c295e6cb0529417861c27f0287122ceadcf3065')
-    hackathon = conn.me.boards[4]
+    conn = TrelloConnection('69387d468622b15d7a0a571e8165a793', 'c2021799351a98257f7cfde07b51d599434794eecf02c4923515769d0a5bbefc')
+    hackathon = conn.me.boards[0]
     board_members = hackathon.members
+    
 
     # Create a dict entry for each member
     mem_count = {}
@@ -22,8 +23,25 @@ def home(request):
     for card in hackathon.cards:
         for member in card.members:
             mem_count[member.fullname] += 1
-
+ 
     data['assignments'] = mem_count
+    
+    # Create an empty dict for each category
+    mem_categories = {}
+    for list in hackathon.lists:
+        mem_categories[list.name] = 0
+    
+    # Create a dict for each member with stories by category
+    adv_mem_count = {}
+    for member in board_members:
+        adv_mem_count[member.fullname] = mem_categories.copy() #copy() to create a new reference
+        
+    # Populate that dict with actual stories, broken out by category
+    for card in hackathon.cards:
+        for member in card.members:
+            adv_mem_count[member.fullname][card.list.name] += 1
+            
+    data['adv_assignments'] = adv_mem_count
 
     # Current status - count of each list
     list_count = {}

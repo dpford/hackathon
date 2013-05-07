@@ -27,8 +27,9 @@
 
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load('visualization', '1');
+      google.load('visualization', '1', {packages: ['corechart']});
     </script>	
+    <!--
     <script type="text/javascript">
       function drawVisualization() {
         var wrapper = new google.visualization.ChartWrapper({
@@ -45,7 +46,28 @@
 
       google.setOnLoadCallback(drawVisualization);
     </script>
+    -->
+    <script type="text/javascript">
+        function drawVisualization() {
+            // Create and populate the data table.
+            var data = google.visualization.arrayToDataTable([
+                ['Member', {% for key in list_count %}{% if forloop.last %}'{{ key }}'], {% else %} '{{ key }}', {% endif %}{% endfor %}
+                {% for key, value in adv_assignments.items %}['{{ key }}', {% for key2, value2 in value.items %}{% if forloop.parentloop.last and forloop.last %} {{ value2 }}] {% elif forloop.last %} {{ value2 }}], {% else %} {{ value2 }}, {% endif %} {% endfor %} {% endfor %}
+            ]);
 
+            // Create and draw the visualization.
+            new google.visualization.ColumnChart(document.getElementById('visualization')).
+                draw(data,
+                    {title:"Stories by Team Member",
+                    width:600, height:400,
+                    vAxis: {title: "Stories"},
+                    hAxis: {title: "Member"},
+                    isStacked: true,
+                    colors:['yellow', 'green','red' ]}
+            );
+        }
+        google.setOnLoadCallback(drawVisualization);
+    </script>
   </head>  
 
   <body>
@@ -75,10 +97,21 @@
 	<div id="content">
 	  <div class="container">
 	    <div class="row">
+            <div class="span8">
+                <h2><strong>Stories by Team Member</strong></h2>
+                <div id="visualization" style="width: 600px; height: 400px;"></div>
+            </div>
+        
+        
+        <!--
 	    	<div class="span8">
-	    		<h2><strong>Stories per team member</strong></h2>
+	    		
+                
+                <h2><strong>Stories per team member</strong></h2>
 	    		<div id="visualization" style="width: 600px; height: 400px;"></div>
-	    	</div>
+                </div>
+                -->
+                
 	    	<div class="span4">
 	    		<h2><strong>Current Project Status</strong></h2>
 	    		{% for key,value in list_count.items %}

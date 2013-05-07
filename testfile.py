@@ -1,7 +1,7 @@
 from trollop import TrelloConnection
 import datetime
 
-conn = TrelloConnection('8e08cc15f33eba483bc2ec18f5d9d2e8', '546c06039131159676b3f7c41c295e6cb0529417861c27f0287122ceadcf3065')
+conn = TrelloConnection('69387d468622b15d7a0a571e8165a793', 'c2021799351a98257f7cfde07b51d599434794eecf02c4923515769d0a5bbefc')
 
 print conn
 
@@ -11,8 +11,8 @@ print "Show boards"
 print conn.me.boards
 
 print "Get Hackathon board"
-hackathon = conn.me.boards[4]
-print conn.me.boards[4]
+hackathon = conn.me.boards[0]
+print conn.me.boards[0]
 
 print "Show cards"
 print hackathon.cards
@@ -38,20 +38,28 @@ member_cards = hackathon.members[1].cards
 print "*** Get member counts ***"
 board_members = hackathon.members
 
-print "Create a dict entry for each member"
-mem_count = {}
-for member in board_members:
-	mem_count[member.fullname] = 0
+# Create an empty dict for each category
+    
+mem_categories = {}
+for list in hackathon.lists:
+    mem_categories[list.name] = 0
+print mem_categories
 
-print mem_count
+
+
+print "Create a dict entry for each member"
+adv_mem_count = {}
+for member in board_members:
+	adv_mem_count[member.fullname] = mem_categories.copy()
+
+print adv_mem_count
 
 print "Populate dict"
 for card in hackathon.cards:
 	for member in card.members:
-		mem_count[member.fullname] += 1
+		adv_mem_count[member.fullname][card.list.name] += 1
 
-print mem_count
-
+print adv_mem_count
 print "Count of each list"
 list_count = {}
 for list in hackathon.lists:
@@ -75,3 +83,11 @@ for card in hackathon.cards:
             late_dict['due'] = card._data['due'][:10]
             print late_dict
             late_master.append(late_dict)
+            
+for key in list_count:
+    print key
+for key, value in adv_mem_count.items():
+    print key
+    for key2, value2 in value.items():
+        print value2
+    
