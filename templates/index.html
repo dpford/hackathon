@@ -14,6 +14,9 @@
     <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
 	<link href="{{ STATIC_URL }}css/blue.css" rel="stylesheet">
 	<link href="{{ STATIC_URL }}css/jquery.dataTables.css" rel="stylesheet">
+
+  
+ 
 	
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -26,9 +29,13 @@
     <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
 
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <!--
+
     <script type="text/javascript">
       google.load('visualization', '1', {packages: ['corechart']});
     </script>	
+
+  -->
     <!--
     <script type="text/javascript">
       function drawVisualization() {
@@ -47,6 +54,7 @@
       google.setOnLoadCallback(drawVisualization);
     </script>
     -->
+    <!--
     <script type="text/javascript">
         function drawVisualization() {
             // Create and populate the data table.
@@ -67,7 +75,8 @@
             );
         }
         google.setOnLoadCallback(drawVisualization);
-    </script>
+    </script>*/
+    -->
   </head>  
 
   <body>
@@ -99,7 +108,11 @@
 	    <div class="row">
             <div class="span8">
                 <h2><strong>Stories by Team Member</strong></h2>
-                <div id="visualization" style="width: 600px; height: 400px;"></div>
+                <!-- <div id="visualization" style="width: 600px; height: 400px;"></div> -->
+                <div id="container" style="width:600px; height:400px;"> </div>
+
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
         
         
@@ -114,9 +127,12 @@
                 
 	    	<div class="span4">
 	    		<h2><strong>Current Project Status</strong></h2>
-	    		{% for key,value in list_count.items %}
+	    		<!-- {% for key,value in list_count.items %}
 		        	<p><strong>{{ value }}</strong> Stories in {{ key }}</p>
-		        {% endfor %}
+		        {% endfor %} -->
+            <p><strong>{{ backlog.count }}<strong> Stories in Backlog</p>
+            <p><strong>{{ doing.count }}<strong> Stories in Doing</p>
+            <p><strong>{{ done.count }}<strong> Stories in Done</p>
 	    	</div>
 	    </div>
 	    <div class="row">
@@ -179,6 +195,9 @@
 			});
 		});
 	</script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+ {% include "charts/stories_by_team_member.html" %}
 
   </body>
 </html>

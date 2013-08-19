@@ -1,0 +1,92 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "super", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2013-08-19T20:28:48.104Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$r6RkcpgAk8qc$Wxks18PZy2gPZSACeqvSa5K8UEUmJcIXTc3tc4DEA80=", 
+        "email": "dpford@gmail.com", 
+        "date_joined": "2013-08-19T20:28:48.104Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Dan Ford"
+    }
+},
+{
+    "pk": 2, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "David Garber"
+    }
+},
+{
+    "pk": 3, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Andrew Baker"
+    }
+},
+{
+    "pk": 4, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Eduardo Erazo"
+    }
+},
+{
+    "pk": 1, 
+    "model": "dashboard.story", 
+    "fields": {
+        "persons": 1, 
+        "description": "Eradicate this dreadful disease.", 
+        "due_date": "2013-10-25", 
+        "title": "Cure Malaria",
+        "status": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "dashboard.story", 
+    "fields": {
+        "persons": 3, 
+        "description": "The next best American novel, plz", 
+        "due_date": "2013-08-01", 
+        "title": "Write a Novel",
+        "status": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "dashboard.story", 
+    "fields": {
+        "persons": 1, 
+        "description": "Read the how-to", 
+        "due_date": "2013-12-25", 
+        "title": "Win Friends",
+        "status": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "dashboard.story", 
+    "fields": {
+        "persons": 1, 
+        "description": "Read the how-to", 
+        "due_date": "2013-12-25", 
+        "title": "Influence People",
+        "status": 1
+    }
+}
+]
