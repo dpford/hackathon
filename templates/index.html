@@ -5,15 +5,14 @@
     <title>Excello</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Evan Clemente">
-	
-    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-	<link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="{{ STATIC_URL }}css/glyphicons.css" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-    <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
-	<link href="{{ STATIC_URL }}css/blue.css" rel="stylesheet">
-	<link href="{{ STATIC_URL }}css/jquery.dataTables.css" rel="stylesheet">
+    <meta name="author" content="Dan Ford">
+	  <style>body {padding-top: 60px;}</style>
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
+  	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
+  	<link href="{{ STATIC_URL }}css/jquery.dataTables.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}css/bootstrap-theme.css" rel="stylesheet">
 
   
  
@@ -28,117 +27,52 @@
     <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
 
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <!--
-
-    <script type="text/javascript">
-      google.load('visualization', '1', {packages: ['corechart']});
-    </script>	
-
-  -->
-    <!--
-    <script type="text/javascript">
-      function drawVisualization() {
-        var wrapper = new google.visualization.ChartWrapper({
-          chartType: 'ColumnChart',
-          dataTable: [[ '', {% for key,value in assignments.items %} {% if forloop.last %} '{{ key }}' {% else %} '{{ key }}', {% endif %} {% endfor %}],
-                      [ '', {% for key,value in assignments.items %} {% if forloop.last %} {{ value }} {% else %} {{ value }}, {% endif %} {% endfor %}]],
-          options: {'title': 'Stories per team member'},
-          containerId: 'visualization'
-        });
-        wrapper.draw();
-      }
-      
-      
-
-      google.setOnLoadCallback(drawVisualization);
-    </script>
-    -->
-    <!--
-    <script type="text/javascript">
-        function drawVisualization() {
-            // Create and populate the data table.
-            var data = google.visualization.arrayToDataTable([
-                ['Member', {% for key in list_count %}{% if forloop.last %}'{{ key }}'], {% else %} '{{ key }}', {% endif %}{% endfor %}
-                {% for key, value in adv_assignments.items %}['{{ key }}', {% for key2, value2 in value.items %}{% if forloop.parentloop.last and forloop.last %} {{ value2 }}] {% elif forloop.last %} {{ value2 }}], {% else %} {{ value2 }}, {% endif %} {% endfor %} {% endfor %}
-            ]);
-
-            // Create and draw the visualization.
-            new google.visualization.ColumnChart(document.getElementById('visualization')).
-                draw(data,
-                    {title:"Stories by Team Member",
-                    width:600, height:400,
-                    vAxis: {title: "Stories"},
-                    hAxis: {title: "Member"},
-                    isStacked: true,
-                    colors:['yellow', 'green','red' ]}
-            );
-        }
-        google.setOnLoadCallback(drawVisualization);
-    </script>*/
-    -->
+	<!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+   
   </head>  
 
   <body>
 
-	<div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>		
-          <a class="brand" href="{% url 'home' %}">Excello</a>
-		  <div class="nav-collapse collapse">
-            <ul class="nav pull-right animated">
-              <li><a href="{% url 'home' %}">Home</a></li>	
-              <li><a href="about.html">About</a></li>		  
-			  <li><a href="pricing.html">Pricing</a></li>
-			  <li><a href="login.html">Login</a></li>
-			  <li><a href="register.html">Register</a></li>
-            </ul>
-		  </div>
-        </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>		
+        <a class="navbar-brand" href="{% url 'home' %}">Excello</a>
       </div>
-    </div>	
+		  <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'home' %}">Home</a></li>	
+          <li><a href="about.html">About</a></li>		  
+			    <li><a href="pricing.html">Pricing</a></li>
+			    <li><a href="login.html">Login</a></li>
+			    <li><a href="register.html">Register</a></li>
+        </ul>
+		  </div>
+    </div>
+  </div>	
 
-	<div id="content">
 	  <div class="container">
 	    <div class="row">
-            <div class="span8">
+            <div class="col-lg-8">
                 <h2><strong>Stories by Team Member</strong></h2>
-                <!-- <div id="visualization" style="width: 600px; height: 400px;"></div> -->
-                <div id="container" style="width:600px; height:400px;"> </div>
-
-
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            </div>
-        
-        
-        <!--
-	    	<div class="span8">
-	    		
-                
-                <h2><strong>Stories per team member</strong></h2>
-	    		<div id="visualization" style="width: 600px; height: 400px;"></div>
-                </div>
-                -->
-                
-	    	<div class="span4">
+                <div id="stories-by-team-member"> </div>
+            </div>                
+	    	<div class="col-lg-4">
 	    		<h2><strong>Current Project Status</strong></h2>
-	    		<!-- {% for key,value in list_count.items %}
-		        	<p><strong>{{ value }}</strong> Stories in {{ key }}</p>
-		        {% endfor %} -->
-            <p><strong>{{ backlog.count }}<strong> Stories in Backlog</p>
-            <p><strong>{{ doing.count }}<strong> Stories in Doing</p>
-            <p><strong>{{ done.count }}<strong> Stories in Done</p>
+            <!-- {% for list in lists %}
+              <p><strong>{{ list.stories.count }}</strong> Stories in {{ list.title }}</p>
+            {% endfor %} -->
+            <div id="pie-chart"></div>
 	    	</div>
 	    </div>
 	    <div class="row">
-	    	<div class="span12">
+	    	<div class="col-lg-12">
 	    		<h2><strong>Unfinished User Stories</strong></h2>
-			    <table class="table table-striped table-bordered" id="late-stories-table">
+			    <table class="table table-striped table-bordered table-condensed" id="late-stories-table">
 			        <thead>
 			            <th>Title</th>
 			            <th>Description</th>
@@ -146,20 +80,20 @@
 			            <th>Due date</th>
 			        </thead>
 			        <tbody>
-			            {% for item in late_stories %}
+			            {% for story in late_stories %}
 			                <tr>
-			                	<td>{{ item.title }}</td>
-			                	<td>{{ item.description }}</td>
+			                	<td>{{ story.title }}</td>
+			                	<td>{{ story.description }}</td>
 			                	<td>
-			                		{% for member in item.members %}
+			                		{% for person in story.persons.all %}
 			                			{% if forloop.last %}
-			                				{{ member }}
+			                				{{ person }}
 			                			{% else %}
-			                				{{ member }},
+			                				{{ person }},
 			                			{% endif %}
 			                		{% endfor %}
 			                	</td>
-			                	<td>{{ item.due }}</td>
+			                	<td>{{ story.due_date }}</td>
 			                </tr>
 			            {% endfor %}
 			        </tbody>
@@ -167,24 +101,22 @@
 	    	</div>
 	    </div>
 	  </div>
-	</div>
 
 	<div id="copywrite">
 	  <div class="container">
 	    <div class="row">
 		  <div class="span12">
-		    <p>&copy; 2013 Excello <span id="totop" class="pull-right">Back to Top <i class="icon-arrow-up icon-white"></i></span></p>			
+		    <p>&copy; 2013 Excello <span id="totop" class="pull-right">Back to Top <i class="glyphicon-arrow-up glyphicon-white"></i></span></p>			
 		  </div>		  
 		</div>	  
       </div>	  
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="//code.jquery.com/jquery.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 	<script src="{{ STATIC_URL }}js/jquery.fitvids.js"></script>
 	<script src="{{ STATIC_URL }}js/jqBootstrapValidation.js"></script>
-	<script src="{{ STATIC_URL }}js/bounce.js"></script>	
 	<script src="{{ STATIC_URL }}js/jquery.dataTables.js"></script>
 
 	<script type="text/javascript">
@@ -198,6 +130,6 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/modules/exporting.js"></script>
  {% include "charts/stories_by_team_member.html" %}
-
+ {% include "charts/stories_pie_chart.html" %}
   </body>
 </html>

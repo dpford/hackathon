@@ -1,0 +1,45 @@
+<script>
+$(function () {
+    $('#pie-chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        
+        colors: ['#002d62', '#e51937', '#74c365'],
+
+        title: {
+            text: ''
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Percent of Total',
+            data: [
+                {% for list in list_percentages %}
+                    {% if forloop.last %}
+                    ['{{ list.0 }}', {{ list.1|floatformat:2 }}]
+                    {% else %}
+                    ['{{ list.0 }}', {{ list.1|floatformat:2 }}],
+                    {% endif %}
+                {% endfor %}
+            ]
+        }]
+    });
+});
+</script>

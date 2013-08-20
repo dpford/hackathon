@@ -1,33 +1,41 @@
 <script>
 $(function () {
-        $('#container').highcharts({
+        $('#stories-by-team-member').highcharts({
             chart: {
                 type: 'column'
             },
+            credits: {
+                enabled: false
+            },
+            colors: ['#e51937', '#74c365', '#002d62'],
             title: {
-                text: 'Stacked column chart'
+                text: ''
             },
             xAxis: {
-                categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                categories: [
+                {% for list, people in person_list_count.items|slice:":1" %}
+                    {% for person, stories in people.items %}
+                        {% if forloop.last %}
+                        '{{ person }}'
+                        
+                        {% else %}
+                        '{{ person }}',
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                ]
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Total fruit consumption'
+                    text: 'Stories'
                 },
-                stackLabels: {
-                    enabled: true,
-                    style: {
-                        fontWeight: 'bold',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                    }
-                }
             },
             legend: {
                 align: 'right',
                 x: -70,
                 verticalAlign: 'top',
-                y: 20,
+                y: 40,
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
                 borderColor: '#CCC',
@@ -44,22 +52,25 @@ $(function () {
             plotOptions: {
                 column: {
                     stacking: 'normal',
-                    dataLabels: {
-                        enabled: true,
-                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-                    }
                 }
             },
-            series: [{
-                name: 'John',
-                data: [5, 3, 4, 7, 2]
-            }, {
-                name: 'Jane',
-                data: [2, 2, 3, 2, 1]
-            }, {
-                name: 'Joe',
-                data: [3, 4, 4, 2, 5]
-            }]
+            series: [
+                {% for list, people in person_list_count.items %}
+                    {
+                        name: '{{ list }}',
+                        data: [
+                        {% for person, stories in people.items %}
+                            {% if forloop.last %}
+                                {{ stories }}
+                            {% else %}
+                                {{ stories }},
+                            {% endif %}
+                        {% endfor %}
+                        ]
+                    },
+                {% endfor %}
+
+             ]
         });
     });
 </script>

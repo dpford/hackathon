@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import never_cache
 
-from .models import Person, Story, Board
+from .models import Person, Story, Board, List
 
 from trollop import TrelloConnection
 
@@ -84,11 +84,36 @@ def home(request):
     #             late_dict['description'] = card.desc
     #             late_dict['due'] = card._data['due'][:10]
     #             late_master.append(late_dict)
-    # data['late_stories'] = late_master    
+    # data['late_stories'] = late_master  
 
+
+    # get data for people/story breakdown
+    person_count = {}
+    for person in Person.objects.all():
+        person_count[person.name] = 0
+
+    person_list_count = {}
+    for list in List.objects.all():
+        person_list_count[list.title] = person_count.copy()
+
+    for person in Person.objects.all():
+        for story in person.stories():
+            person_list_count[story.current_list.title][person.name] += 1
+
+    # create data for pie chart
+
+    list_percentages =[]
+    total_stories = Story.objects.all().count() * 1.0 # turn into float
+    for list in List.objects.all():
+        percent_this_story = (list.stories().count() / total_stories) * 100
+        list_percentages.append([list.title, percent_this_story])
+
+    print Story.objects.filter(due_date__lt=datetime.date.today())
     return render(request, 'index.html',
                   {'persons': Person.objects.all(),
-                  'backlog': Story.objects.filter(status=1),
-                  'doing': Story.objects.filter(status=2),
-                  'done': Story.objects.filter(status=3),
-                  'boards': Board.objects.all()})
+                  'lists': List.objects.all(),
+                  'stories': Story.objects.all(),
+                  'boards': Board.objects.all(),
+                  'person_list_count': person_list_count,
+                  'list_percentages' : list_percentages,
+                  'late_stories' : Story.objects.filter(due_date__lt=datetime.date.today())})

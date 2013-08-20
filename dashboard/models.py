@@ -5,29 +5,41 @@ from django.db import models
 class Person(models.Model):
 	name = models.CharField(max_length=100)
 
+	def stories(self):
+		return Story.objects.filter(persons__in=[self])
+
 	def __unicode__(self):
 		return self.name
-
-class Story(models.Model):
-
-	STATUS_CHOICES = (
-	    (1, "Backlog"),
-	    (2, "Doing"),
-	    (3, "Done"),
-	)
-
-
-	title = models.CharField(max_length=300)
-	description = models.TextField()
-	persons = models.ForeignKey(Person)
-	due_date = models.DateField()
-	status = models.IntegerField(choices=STATUS_CHOICES)
-
-	def __unicode__(self):
-		return "Story: %s" % (self.title,)
 
 class Board(models.Model):
 	title = models.CharField(max_length=100)
 
 	def __unicode__(self):
-		return "Board: %s" % (self.title)
+		return "Board: %s" % (self.title,)
+
+class List(models.Model):
+	title = models.CharField(max_length=100)
+	board = models.ForeignKey(Board)
+
+	def stories(self):
+		return Story.objects.filter(current_list=self)
+
+	def __unicode__(self):
+		return 'List: %s' % (self.title,)
+
+
+class Story(models.Model):
+
+	title = models.CharField(max_length=300)
+	description = models.TextField()
+	persons = models.ManyToManyField(Person, blank=True)
+	due_date = models.DateField(blank=True, null=True)
+	current_list = models.ForeignKey(List)
+	board = models.ForeignKey(Board)
+	updated = models.DateTimeField()
+
+	def __unicode__(self):
+		return "Story: %s" % (self.title,)
+
+	class Meta:
+		verbose_name_plural = "stories"

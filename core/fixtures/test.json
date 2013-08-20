@@ -1,0 +1,150 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "super", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2013-08-19T20:28:48.104Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$r6RkcpgAk8qc$Wxks18PZy2gPZSACeqvSa5K8UEUmJcIXTc3tc4DEA80=", 
+        "email": "dpford@gmail.com", 
+        "date_joined": "2013-08-19T20:28:48.104Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Dan Ford"
+    }
+},
+{
+    "pk": 2, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "David Garber"
+    }
+},
+{
+    "pk": 3, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Andrew Baker"
+    }
+},
+{
+    "pk": 4, 
+    "model": "dashboard.person", 
+    "fields": {
+        "name": "Eduardo Erazo"
+    }
+},
+
+{
+    "pk": 1, 
+    "model": "dashboard.board", 
+    "fields": {
+        "title": "Main Board"
+    }
+},
+{
+    "pk": 1, 
+    "model": "dashboard.list", 
+    "fields": {
+        "board": 1, 
+        "title": "Backlog"
+    }
+},
+{
+    "pk": 2, 
+    "model": "dashboard.list", 
+    "fields": {
+        "board": 1, 
+        "title": "Doing"
+    }
+},
+{
+    "pk": 3, 
+    "model": "dashboard.list", 
+    "fields": {
+        "board": 1, 
+        "title": "Done"
+    }
+},
+{
+    "pk": 1, 
+    "model": "dashboard.story", 
+    "fields": {
+        "due_date": "2013-08-27", 
+        "current_list": 1, 
+        "description": "testing test", 
+        "title": "Test 1", 
+        "persons": [
+            1
+        ], 
+        "board": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "dashboard.story", 
+    "fields": {
+        "due_date": "2013-08-20", 
+        "current_list": 2, 
+        "description": "testing 2", 
+        "title": "Test 2", 
+        "persons": [
+            2
+        ], 
+        "board": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "dashboard.story", 
+    "fields": {
+        "due_date": "2013-08-10", 
+        "current_list": 3, 
+        "description": "blah test", 
+        "title": "Test 3", 
+        "persons": [
+            3
+        ], 
+        "board": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "dashboard.story", 
+    "fields": {
+        "due_date": "2013-08-18", 
+        "current_list": 1, 
+        "description": "Testings blah backlog not done", 
+        "title": "Test 4", 
+        "persons": [
+            1
+        ], 
+        "board": 1
+    }
+},
+{
+    "pk": 5, 
+    "model": "dashboard.story", 
+    "fields": {
+        "due_date": "2013-08-28", 
+        "current_list": 3, 
+        "description": "tesltkjst", 
+        "title": "Test 5", 
+        "persons": [
+            4
+        ], 
+        "board": 1
+    }
+}
+]
