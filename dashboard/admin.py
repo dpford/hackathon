@@ -6,7 +6,7 @@ class PersonAdmin(admin.ModelAdmin):
 	list_display = ('name',)
 
 class StoryAdmin(admin.ModelAdmin):
-	list_display = ('title', 'description', 'due_date',)
+	list_display = ('title', 'description', 'due_date', 'updated',)
 
 class BoardAdmin(admin.ModelAdmin):
 	list_display = ('title',)

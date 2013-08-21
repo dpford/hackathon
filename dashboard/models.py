@@ -4,6 +4,7 @@ from django.db import models
 
 class Person(models.Model):
 	name = models.CharField(max_length=100)
+	trello_id = models.CharField(max_length=100)
 
 	def stories(self):
 		return Story.objects.filter(persons__in=[self])
@@ -13,19 +14,22 @@ class Person(models.Model):
 
 class Board(models.Model):
 	title = models.CharField(max_length=100)
+	trello_id = models.CharField(max_length=100)
+	updated = models.DateTimeField()
 
 	def __unicode__(self):
-		return "Board: %s" % (self.title,)
+		return self.title
 
 class List(models.Model):
 	title = models.CharField(max_length=100)
 	board = models.ForeignKey(Board)
+	trello_id = models.CharField(max_length=100)
 
 	def stories(self):
 		return Story.objects.filter(current_list=self)
 
 	def __unicode__(self):
-		return 'List: %s' % (self.title,)
+		return self.title
 
 
 class Story(models.Model):
@@ -37,9 +41,10 @@ class Story(models.Model):
 	current_list = models.ForeignKey(List)
 	board = models.ForeignKey(Board)
 	updated = models.DateTimeField()
+	trello_id = models.CharField(max_length=100)
 
 	def __unicode__(self):
-		return "Story: %s" % (self.title,)
+		return self.title
 
 	class Meta:
 		verbose_name_plural = "stories"

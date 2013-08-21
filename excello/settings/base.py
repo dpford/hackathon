@@ -1,5 +1,7 @@
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -46,7 +48,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -134,6 +136,7 @@ INSTALLED_APPS = (
     'core',
     'dashboard',
     'debug_toolbar', 
+    'djcelery',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -220,3 +223,7 @@ SUIT_CONFIG = {
     # misc
     # 'LIST_PER_PAGE': 15
 }
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = os.environ.get('REDISTOGO_URL', 'redis://localhost:6379')

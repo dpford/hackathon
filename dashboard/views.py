@@ -96,7 +96,7 @@ def home(request):
     for list in List.objects.all():
         person_list_count[list.title] = person_count.copy()
 
-    for person in Person.objects.all():
+    for person in Person.objects.select_related():
         for story in person.stories():
             person_list_count[story.current_list.title][person.name] += 1
 
@@ -108,7 +108,6 @@ def home(request):
         percent_this_story = (list.stories().count() / total_stories) * 100
         list_percentages.append([list.title, percent_this_story])
 
-    print Story.objects.filter(due_date__lt=datetime.date.today())
     return render(request, 'index.html',
                   {'persons': Person.objects.all(),
                   'lists': List.objects.all(),
@@ -116,4 +115,4 @@ def home(request):
                   'boards': Board.objects.all(),
                   'person_list_count': person_list_count,
                   'list_percentages' : list_percentages,
-                  'late_stories' : Story.objects.filter(due_date__lt=datetime.date.today())})
+                  'late_stories' : Story.objects.filter(due_date__lt=datetime.date.today()).exclude(current_list__title='Done')})

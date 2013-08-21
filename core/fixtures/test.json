@@ -1,22 +1,5 @@
 [
-{
-    "pk": 1, 
-    "model": "auth.user", 
-    "fields": {
-        "username": "super", 
-        "first_name": "", 
-        "last_name": "", 
-        "is_active": true, 
-        "is_superuser": true, 
-        "is_staff": true, 
-        "last_login": "2013-08-19T20:28:48.104Z", 
-        "groups": [], 
-        "user_permissions": [], 
-        "password": "pbkdf2_sha256$10000$r6RkcpgAk8qc$Wxks18PZy2gPZSACeqvSa5K8UEUmJcIXTc3tc4DEA80=", 
-        "email": "dpford@gmail.com", 
-        "date_joined": "2013-08-19T20:28:48.104Z"
-    }
-},
+
 {
     "pk": 1, 
     "model": "dashboard.person", 
