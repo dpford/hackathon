@@ -8,6 +8,10 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'excello.views.home', name='home'),
      url(r'^$', include('dashboard.urls')),
+    url(r'^about/$', 'dashboard.views.about', name='about'),
+    url(r'^pricing/$', 'dashboard.views.pricing', name='pricing'),
+    url(r'^login/$', 'dashboard.views.login', name='login'),
+    url(r'^register/$', 'dashboard.views.register', name='register'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,0 +1,73 @@
+<script>
+$(function () {
+        $('#actions-activity').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Last week', 'Two weeks ago', 'Three weeks ago', 'Four weeks ago'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Actions'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+            {% for person in list_action_counts %}
+	            {
+	                name: '{{ person.0 }}',
+	                data: [
+	                {% for data_point in person.1 %}
+	                	{% if forloop.last %}
+	                		{{ data_point }}
+	                	{% else %}
+	                		{{ data_point }},
+	                	{% endif %}
+	                {% endfor %}
+	                ]
+	            }
+	            {% if not forloop.last %}
+	            	, 
+	            {% endif %}
+	        {% endfor %}
+            ]
+        });
+    });
+    
+
+</script>

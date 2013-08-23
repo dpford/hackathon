@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+	<li><a href="{% url 'home' %}">Home</a></li>	
+	<li><a href="/about/">About</a></li>	  
+	<li><a href="/pricing/">Pricing</a></li>
+	<li><a href="/login/">Login</a></li>
+	<li class="active"><a href="/register/">Register</a></li>
+{% endblock navbar %}
+
+{% block content %}
+Register page
+{% endblock content %}

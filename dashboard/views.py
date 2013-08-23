@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import never_cache
 
-from .models import Person, Story, Board, List
+from .models import Person, Story, Board, List, Action
 
 from trollop import TrelloConnection
 
@@ -89,7 +89,7 @@ def home(request):
 
     # get data for people/story breakdown
     person_count = {}
-    for person in Person.objects.all():
+    for person in Person.objects.select_related():
         person_count[person.name] = 0
 
     person_list_count = {}
@@ -102,17 +102,48 @@ def home(request):
 
     # create data for pie chart
 
-    list_percentages =[]
+    list_percentages = []
     total_stories = Story.objects.all().count() * 1.0 # turn into float
     for list in List.objects.all():
         percent_this_story = (list.stories().count() / total_stories) * 100
         list_percentages.append([list.title, percent_this_story])
 
+    # create data for action activity
+
+    list_action_counts = []
+    for person in Person.objects.all():
+        one_week = len(Action.objects.filter(person=person, 
+                                             date__gt=(datetime.datetime.now() - datetime.timedelta(days=7))))
+        two_week = len(Action.objects.filter(person=person, 
+                                             date__gt=(datetime.datetime.now() - datetime.timedelta(days=14)),
+                                             date__lt=(datetime.datetime.now() - datetime.timedelta(days=7))))
+        three_week = len(Action.objects.filter(person=person, 
+                                             date__gt=(datetime.datetime.now() - datetime.timedelta(days=21)),
+                                             date__lt=(datetime.datetime.now() - datetime.timedelta(days=14))))
+        four_week = len(Action.objects.filter(person=person, 
+                                             date__gt=(datetime.datetime.now() - datetime.timedelta(days=28)),
+                                             date__lt=(datetime.datetime.now() - datetime.timedelta(days=21))))
+        list_action_counts.append([person.name, [one_week, two_week, three_week, four_week]])
+
+
     return render(request, 'index.html',
-                  {'persons': Person.objects.all(),
-                  'lists': List.objects.all(),
-                  'stories': Story.objects.all(),
-                  'boards': Board.objects.all(),
-                  'person_list_count': person_list_count,
+                  {'persons' : Person.objects.all(),
+                  'lists' : List.objects.all(),
+                  'stories' : Story.objects.all(),
+                  'boards' : Board.objects.all(),
+                  'person_list_count' : person_list_count,
                   'list_percentages' : list_percentages,
-                  'late_stories' : Story.objects.filter(due_date__lt=datetime.date.today()).exclude(current_list__title='Done')})
+                  'late_stories' : Story.objects.filter(due_date__lt=datetime.date.today()).exclude(current_list__title='Done'),
+                  'list_action_counts' : list_action_counts})
+
+def about(request):
+    return render(request, 'about.html', {})
+
+def pricing(request):
+    return render(request, 'pricing.html', {})
+
+def login(request):
+    return render(request, 'login.html', {})
+
+def register(request):
+    return render(request, 'register.html', {})
