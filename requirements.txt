@@ -1,0 +1,2 @@
+# Heroku looks for requirements.txt in root directory of the project
+-r requirements/prod.txt
