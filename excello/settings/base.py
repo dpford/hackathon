@@ -135,7 +135,6 @@ INSTALLED_APPS = (
     'storages',
     'core',
     'dashboard',
-    'debug_toolbar', 
     'djcelery',
 )
 
