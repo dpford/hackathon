@@ -9,5 +9,5 @@ StaticStorage = lambda: S3BotoStorage(
 # Define bucket and folder for media files.
 MediaStorage  = lambda: S3BotoStorage(
     bucket='excello2',
-    location='media'
+    location='media',
     custom_domain='')
