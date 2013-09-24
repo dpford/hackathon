@@ -8,10 +8,10 @@ html5lib==0.95
 isodate==0.4.9
 psycopg2==2.5
 rdflib==3.4.0
-requests==0.9.3
 trollop==0.0.12
 wsgiref==0.1.2
 django-suit==0.2.4
 django-celery==3.0.21
 redis==2.7.6
+requests==2.0.0
 python-social-auth==0.1.13
