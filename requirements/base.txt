@@ -14,3 +14,4 @@ wsgiref==0.1.2
 django-suit==0.2.4
 django-celery==3.0.21
 redis==2.7.6
+python-social-auth==0.1.13

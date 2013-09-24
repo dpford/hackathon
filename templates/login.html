@@ -9,5 +9,33 @@
 {% endblock navbar %}
 
 {% block content %}
-Login page
+<div id="wrapper">
+    <div id="login">
+        <form action="#" class="form-login"> 
+            <div class="login">
+            	<div class="header">Excello Login</div>
+            	<div class="github-login">
+                	<input type="submit" class="" value="Sign in with GitHub" id="github-sign-in-btn">
+            	</div>
+            	<div class="google-login">
+                	<input type="submit" class="" value="Sign in with Google" id="google-sign-in-btn">
+            	</div>
+            </div>
+
+        </form>
+    </div>   
+</div>  
+<script src="{{STATIC_URL}}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+        $('#github-sign-in-btn').click(function(e) {
+            e.preventDefault();
+            window.open("{% url 'social:begin' 'github' %}", "_self");
+        });
+</script>
+<script type="text/javascript">
+        $('#google-sign-in-btn').click(function(e) {
+            e.preventDefault();
+            window.open("{% url 'social:begin' 'google-oauth2' %}", "_self");
+        });
+</script>
 {% endblock content %}

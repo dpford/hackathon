@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'core',
     'dashboard',
     'djcelery',
+    'social.apps.django_app.default',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -191,6 +192,8 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 SUIT_CONFIG = {
@@ -225,3 +228,14 @@ SUIT_CONFIG = {
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = os.environ.get('REDISTOGO_URL', 'redis://localhost:6379')
+
+AUTHENTICATION_BACKENDS = (
+      'social.backends.google.GoogleOAuth2',
+      'social.backends.github.GithubOAuth2',
+      'django.contrib.auth.backends.ModelBackend',
+  )
+
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
