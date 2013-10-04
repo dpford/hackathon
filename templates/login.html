@@ -9,17 +9,19 @@
 {% endblock navbar %}
 
 {% block content %}
-<div id="wrapper">
-    <div id="login">
+<div class="container">
+    <div class="jumbotron">
         <form action="#" class="form-login"> 
-            <div class="login">
-            	<div class="header">Excello Login</div>
-            	<div class="github-login">
-                	<input type="submit" class="" value="Sign in with GitHub" id="github-sign-in-btn">
+            <div class="row">
+            	<div class="col-lg-4">
+                    <p><a class='zocial github' id='github-sign-in-btn'>Sign in with GitHub</a></p>
             	</div>
-            	<div class="google-login">
-                	<input type="submit" class="" value="Sign in with Google" id="google-sign-in-btn">
+            	<div class="col-lg-4">
+                    <p><a class='zocial google' id='google-sign-in-btn'> Sign in with Google</a></p>
             	</div>
+                <div class="col-lg-4">
+                    <p><a class='zocial facebook' id='facebook-sign-in-btn'> Sign in with Facebook</a></p>
+                </div>
             </div>
 
         </form>
@@ -36,6 +38,12 @@
         $('#google-sign-in-btn').click(function(e) {
             e.preventDefault();
             window.open("{% url 'social:begin' 'google-oauth2' %}", "_self");
+        });
+</script>
+<script type="text/javascript">
+        $('#facebook-sign-in-btn').click(function(e) {
+            e.preventDefault();
+            window.open("{% url 'social:begin' 'facebook' %}", "_self");
         });
 </script>
 {% endblock content %}
