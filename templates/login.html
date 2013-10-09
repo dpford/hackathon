@@ -19,6 +19,13 @@
             	<div class="col-lg-4">
                     <p><a class='zocial google' id='google-sign-in-btn'> Sign in with Google</a></p>
             	</div>
+                
+                
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <p><a class='zocial guest' id='trello-sign-in-btn'> Sign in with Trello</a></p>
+                </div>
                 <div class="col-lg-4">
                     <p><a class='zocial facebook' id='facebook-sign-in-btn'> Sign in with Facebook</a></p>
                 </div>
@@ -44,6 +51,12 @@
         $('#facebook-sign-in-btn').click(function(e) {
             e.preventDefault();
             window.open("{% url 'social:begin' 'facebook' %}", "_self");
+        });
+</script>
+<script type="text/javascript">
+        $('#trello-sign-in-btn').click(function(e) {
+            e.preventDefault();
+            window.open("{% url 'social:begin' 'trello' %}", "_self");
         });
 </script>
 {% endblock content %}
