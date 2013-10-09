@@ -247,3 +247,5 @@ SOCIAL_AUTH_TRELLO_KEY = os.environ.get('SOCIAL_AUTH_TRELLO_KEY')
 SOCIAL_AUTH_TRELLO_SECRET = os.environ.get('SOCIAL_AUTH_TRELLO_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_USER_MODEL = 'dashboard.ExcelloUser'
+
+SOCIAL_AUTH_TRELLO_EXTRA_DATA = [('accessToken', 'accessToken'), ('accessTokenSecret', 'accessTokenSecret')]
