@@ -85,7 +85,10 @@ def home(request):
     #             late_dict['due'] = card._data['due'][:10]
     #             late_master.append(late_dict)
     # data['late_stories'] = late_master  
-
+    if request.user.is_authenticated():
+        print 'authenticated'
+    if request.user.extra_data:
+        print request.user.extra_data
 
     # get data for people/story breakdown
     person_count = {}
