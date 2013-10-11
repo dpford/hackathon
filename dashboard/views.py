@@ -86,7 +86,9 @@ def home(request):
     #             late_master.append(late_dict)
     # data['late_stories'] = late_master  
     if request.user.is_authenticated():
-        print 'authenticated'
+        return redirect('dashboard')
+        request.user.social_auth.filter(provider='trello')[0].extra_data['']
+    return render('home.html', )
     if request.user.extra_data:
         print request.user.extra_data
 
