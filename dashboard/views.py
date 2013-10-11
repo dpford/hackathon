@@ -88,8 +88,8 @@ def home(request):
     #             late_dict['due'] = card._data['due'][:10]
     #             late_master.append(late_dict)
     # data['late_stories'] = late_master  
-    # if request.user.is_authenticated():
-    return HttpResponseRedirect(reverse('dashboard'))
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('dashboard'))
 
     # get data for people/story breakdown
     person_count = {}
@@ -154,7 +154,6 @@ def register(request):
 
 # @login_required
 def dashboard(request):
-    # oauth_id = request.user.social_auth.filter(provider='trello')[0].extra_data['']
-    # conn = TrelloConnection(settings.SOCIAL_AUTH_TRELLO_KEY, oauth_id)
-    return render(request, 'dashboard.html', {})
-    # return render(request, 'dashboard.html', {'connection': conn.me})
+    oauth_id = request.user.social_auth.filter(provider='trello')[0].extra_data['']
+    conn = TrelloConnection(settings.SOCIAL_AUTH_TRELLO_KEY, oauth_id)
+    return render(request, 'dashboard.html', {'connection': conn.me})
