@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import never_cache
+from django.conf import settings
 
 from .models import Person, Story, Board, List, Action
 
@@ -88,9 +89,6 @@ def home(request):
     if request.user.is_authenticated():
         return redirect('dashboard')
         request.user.social_auth.filter(provider='trello')[0].extra_data['']
-    return render('home.html', )
-    if request.user.extra_data:
-        print request.user.extra_data
 
     # get data for people/story breakdown
     person_count = {}
@@ -152,3 +150,9 @@ def login(request):
 
 def register(request):
     return render(request, 'register.html', {})
+
+@login_required
+def dashboard(request):
+    oauth_id = request.user.social_auth.filter(provider='trello')[0].extra_data['']
+    conn = TrelloConnection(settings.SOCIAL_AUTH_TRELLO_KEY, oauth_id)
+    return render (request, 'dashboard.html', {'connection': conn.me})
