@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class ExcelloUser(User):
+	person = models.ForeignKey(Person, unique=True, blank=True)
+	boards = models.ManyToManyField(Board, blank=True)
 
 	def __unicode__(self):
 		return self.username

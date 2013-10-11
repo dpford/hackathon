@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from .models import Person, Story, Board, List, Action
+from .models import Person, Story, Board, List, Action, ExcelloUser
 
 from trollop import TrelloConnection
 
@@ -89,7 +89,10 @@ def home(request):
     #             late_master.append(late_dict)
     # data['late_stories'] = late_master  
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('dashboard'))
+        if ExcelloUser.objects.filter(username=request.user.username):
+            return HttpResponseRedirect(reverse('dashboard'))
+        else:
+            return HttpResponseRedirect(reverse('setup'))
 
     # get data for people/story breakdown
     person_count = {}
@@ -143,18 +146,16 @@ def home(request):
 def about(request):
     return render(request, 'about.html', {})
 
-def pricing(request):
-    return render(request, 'pricing.html', {})
-
 def login(request):
     return render(request, 'login.html', {})
 
-def register(request):
-    return render(request, 'register.html', {})
-
-# @login_required
-def dashboard(request):
+@login_required
+def setup(request):
     oauth_id = request.user.social_auth.filter(provider='trello')[0].extra_data['access_token']['oauth_token']
     conn = TrelloConnection(settings.SOCIAL_AUTH_TRELLO_KEY, oauth_id)
     boards = conn.me.boards
-    return render(request, 'dashboard.html', {'boards': boards})
+    return render(request, 'setup.html', {'boards': boards})
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html', {})

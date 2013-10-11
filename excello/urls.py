@@ -9,9 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'excello.views.home', name='home'),
      url(r'^$', include('dashboard.urls')),
     url(r'^about/$', 'dashboard.views.about', name='about'),
-    url(r'^pricing/$', 'dashboard.views.pricing', name='pricing'),
     url(r'^login/$', 'dashboard.views.login', name='login'),
-    url(r'^register/$', 'dashboard.views.register', name='register'),
+    url(r'^dashboard/$', 'dashboard.views.dashboard', name='dashboard'),
     url(r'^dashboard/$', 'dashboard.views.dashboard', name='dashboard'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
