@@ -1,8 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from .models import Person, Story, Board, List, Action
 
@@ -88,8 +89,7 @@ def home(request):
     #             late_master.append(late_dict)
     # data['late_stories'] = late_master  
     if request.user.is_authenticated():
-        return redirect('dashboard')
-        request.user.social_auth.filter(provider='trello')[0].extra_data['']
+        return HttpResponseRedirect(reverse('dashboard'))
 
     # get data for people/story breakdown
     person_count = {}
