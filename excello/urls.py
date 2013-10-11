@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^pricing/$', 'dashboard.views.pricing', name='pricing'),
     url(r'^login/$', 'dashboard.views.login', name='login'),
     url(r'^register/$', 'dashboard.views.register', name='register'),
+    url(r'^dashboard/$', 'dashboard.views.dashboard', name='dashboard'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

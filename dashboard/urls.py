@@ -6,5 +6,4 @@ urlpatterns = patterns('dashboard.views',
     url(r'^pricing/$', 'pricing', name='pricing'),
     url(r'^login/$', 'login', name='login'),
     url(r'^regster/$', 'register', name='register'),
-    url(r'^dashboard/$', 'dashboard', name='dashboard'),
 )
