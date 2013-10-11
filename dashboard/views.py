@@ -156,4 +156,5 @@ def register(request):
 def dashboard(request):
     oauth_id = request.user.social_auth.filter(provider='trello')[0].extra_data['access_token']['oauth_token']
     conn = TrelloConnection(settings.SOCIAL_AUTH_TRELLO_KEY, oauth_id)
-    return render(request, 'dashboard.html', {'connection': conn.me})
+    boards = conn.me.boards
+    return render(request, 'dashboard.html', {'boards': boards})

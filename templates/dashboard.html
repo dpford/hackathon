@@ -9,5 +9,17 @@
 {% endblock navbar %}
 
 {% block content %}
-{{connection}}
+<h2>Select the boards you want us to help you follow</h2>
+<div class="row">
+	<div class="col-lg-6">
+		{% for board in boards %}
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="">
+					{{ board.name }}
+				</label>
+			</div>
+		{% endfor %}
+	</div>
+</div>
 {% endblock content %}
